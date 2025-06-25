@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Budhanilkantha School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f4f8;
+      color: #2c3e50;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header.hero {
+      background: linear-gradient(135deg, #005792, #007cc7);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    header.hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header.hero p {
+      font-size: 1.1rem;
+    }
+
+    nav.main-nav {
+      background: white;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    nav.main-nav ul {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      list-style: none;
+      gap: 20px;
+      padding: 15px;
+    }
+
+    nav.main-nav a {
+      text-decoration: none;
+      color: #005792;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: background 0.3s;
+    }
+
+    nav.main-nav a:hover,
+    nav.main-nav a.active {
+      background-color: #007cc7;
+      color: white;
+    }
+
+    main.contact {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 0 20px;
+      text-align: center;
+      flex: 1; /* fills available vertical space */
+    }
+
+    main.contact h2 {
+      font-size: 2rem;
+      color: #005792;
+      margin-bottom: 20px;
+    }
+
+    main.contact p {
+      font-size: 1.1rem;
+      color: #34495e;
+      margin-bottom: 30px;
+    }
+
+    .claim-button {
+      background-color: #005792;
+      color: white;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 40px;
+      text-decoration: none;
+      box-shadow: 0 5px 12px rgba(0, 87, 146, 0.6);
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    .claim-button:hover {
+      background-color: #007cc7;
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: #bdc3c7;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9rem;
+      margin-top: auto; /* push footer to bottom */
+    }
+
+    @media (max-width: 600px) {
+      header.hero h1 {
+        font-size: 1.8rem;
+      }
+
+      main.contact h2 {
+        font-size: 1.6rem;
+      }
+
+      main.contact p {
+        font-size: 1rem;
+      }
+
+      .claim-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Contact Us</h1>
+    <p>Get in touch or claim your school listing on Edusanjal</p>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="notice.html">Notices</a></li>
+      <li><a href="scholarship.html">Scholarship</a></li>
+      <li><a href="achievements.html">Achievements</a></li>
+      <li><a href="video.html">Videos</a></li>
+      <li><a href="#" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="contact">
+    <h2>Budhanilkantha School, Biratnagar</h2>
+    <p>If you're a representative of Budhanilkantha Secondary English School, you can officially manage your school's listing on Edusanjal.</p>
+    <a class="claim-button" href="https://edusanjal.com/claim/budhanilkantha-secondary-english-school/" target="_blank" rel="noopener noreferrer">
+      📌 Claim on Edusanjal
+    </a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Budhanilkantha School, Biratnagar. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

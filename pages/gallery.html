@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery - Budhanilkantha School</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f4f8;
+      color: #2c3e50;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    header.hero {
+      background: linear-gradient(135deg, #005792, #007cc7);
+      color: white;
+      text-align: center;
+      padding: 50px 20px 40px;
+    }
+    header.hero h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+    header.hero p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: #ffd700;
+      color: #005792;
+      padding: 12px 28px;
+      font-weight: 700;
+      border-radius: 40px;
+      text-decoration: none;
+      box-shadow: 0 5px 12px rgba(255, 215, 0, 0.6);
+      transition: background 0.3s ease;
+      display: inline-block;
+      user-select: none;
+    }
+    .btn:hover,
+    .btn:focus-visible {
+      background: #ffca00;
+      outline: none;
+    }
+    nav.main-nav {
+      background: white;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav.main-nav ul {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      padding: 12px 10px;
+      list-style: none;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav.main-nav a {
+      color: #005792;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+    nav.main-nav a:hover,
+    nav.main-nav a:focus-visible {
+      background: #007cc7;
+      color: white;
+      outline: none;
+    }
+    main.gallery-content {
+      max-width: 1000px;
+      margin: 40px auto 80px;
+      padding: 0 15px;
+      text-align: center;
+    }
+    main.gallery-content h2 {
+      font-size: 2rem;
+      color: #005792;
+      font-weight: 700;
+      margin-bottom: 30px;
+      border-bottom: 4px solid #007cc7;
+      padding-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .gallery-item {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .gallery-item:hover img,
+    .gallery-item:focus-visible img {
+      transform: scale(1.1);
+      outline: none;
+    }
+    .gallery-item p {
+      padding: 12px 10px;
+      font-size: 1rem;
+      color: #34495e;
+      flex-grow: 1;
+      text-align: left;
+    }
+    .gallery-item:hover,
+    .gallery-item:focus-visible {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      outline: none;
+    }
+    /* Popup overlay */
+    #popup-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+      padding: 10px;
+    }
+    #popup-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #popup-overlay img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      animation: zoomIn 0.3s ease forwards;
+      user-select: none;
+    }
+    #popup-close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      user-select: none;
+      z-index: 10000;
+      transition: color 0.3s ease;
+      background: transparent;
+      border: none;
+    }
+    #popup-close:hover,
+    #popup-close:focus-visible {
+      color: #ffd700;
+      outline: none;
+    }
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header.hero h1 {
+        font-size: 2rem;
+      }
+      header.hero p {
+        font-size: 1rem;
+      }
+      main.gallery-content h2 {
+        font-size: 1.6rem;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+      }
+      .gallery-item img {
+        height: 120px;
+      }
+      .gallery-item p {
+        font-size: 0.95rem;
+        padding: 10px 8px;
+      }
+      nav.main-nav ul {
+        gap: 15px;
+        padding: 10px 5px;
+      }
+      nav.main-nav a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+    @media (max-width: 400px) {
+      header.hero h1 {
+        font-size: 1.6rem;
+      }
+      header.hero p {
+        font-size: 0.9rem;
+      }
+      main.gallery-content h2 {
+        font-size: 1.3rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .gallery-item img {
+        height: 180px;
+      }
+      .gallery-item p {
+        font-size: 0.9rem;
+        padding: 8px 6px;
+      }
+      nav.main-nav ul {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px 10px;
+      }
+      nav.main-nav a {
+        font-size: 1rem;
+        padding: 8px 15px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Gallery</h1>
+    <p>Explore moments from our vibrant school life</p>
+    <a href="../index.html" class="btn">Back to Home</a>
+  </header>
+
+  <nav class="main-nav" role="navigation" aria-label="Main navigation">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="#" aria-current="page" class="active">Gallery</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="notice.html">Notices</a></li>
+      <li><a href="scholarship.html">Scholarship</a></li>
+      <li><a href="achievements.html">Achievements</a></li>
+      <li><a href="video.html">Video</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="gallery-content" role="main">
+    <h2>Our School Moments</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item" tabindex="0">
+        <img src="../images/gallery1.jpg" alt="Annual Sports Day 2024" />
+        <p>Annual Sports Day 2024</p>
+      </div>
+      <div class="gallery-item" tabindex="0">
+        <img src="https://picsum.photos/id/1018/600/400" alt="Science Exhibition" />
+        <p>Science Exhibition</p>
+      </div>
+      <div class="gallery-item" tabindex="0">
+        <img src="https://picsum.photos/id/1025/600/400" alt="Art Competition Winners" />
+        <p>Art Competition Winners</p>
+      </div>
+      <div class="gallery-item" tabindex="0">
+        <img src="https://picsum.photos/id/1035/600/400" alt="Field Trip to Botanical Garden" />
+        <p>Field Trip to Botanical Garden</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Popup overlay -->
+  <div id="popup-overlay" role="dialog" aria-modal="true" aria-label="Expanded photo view">
+    <button id="popup-close" aria-label="Close expanded photo">&times;</button>
+    <img id="popup-img" src="" alt="Expanded photo" />
+  </div>
+
+  <script>
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const popupOverlay = document.getElementById('popup-overlay');
+    const popupImg = document.getElementById('popup-img');
+    const popupClose = document.getElementById('popup-close');
+
+    galleryItems.forEach(img => {
+      img.addEventListener('click', () => {
+        popupImg.src = img.src;
+        popupImg.alt = img.alt;
+        popupOverlay.classList.add('visible');
+        popupClose.focus();
+      });
+      // Also open on keyboard Enter/Space for accessibility
+      img.parentElement.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          popupImg.src = img.src;
+          popupImg.alt = img.alt;
+          popupOverlay.classList.add('visible');
+          popupClose.focus();
+        }
+      });
+    });
+
+    function closePopup() {
+      popupOverlay.classList.remove('visible');
+      popupImg.src = '';
+      popupImg.alt = '';
+    }
+
+    popupClose.addEventListener('click', closePopup);
+
+    popupOverlay.addEventListener('click', e => {
+      if (e.target === popupOverlay) closePopup();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && popupOverlay.classList.contains('visible')) {
+        closePopup();
+      }
+    });
+  </script>
+</body>
+</html>
